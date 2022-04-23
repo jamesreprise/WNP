@@ -1,0 +1,30 @@
+# Name of the bounds object.
+NAME:MONA
+# The number of nodes that need to be placed.
+NODE_COUNT:5
+# The area of the room.
+AREA:0,0,25,25
+# The number of iterations.
+ITERATIONS:500
+# Whether we are minimising or not.
+MINIMISING:TRUE
+# A list of constraints and their shape (can be rectangles or circles).
+CONSTRAINT:RECT:7,7,9,9
+CONSTRAINT:RECT:7,11,9,13
+CONSTRAINT:RECT:7,15,9,17
+CONSTRAINT:RECT:7,19,9,21
+CONSTRAINT:RECT:17,7,19,9
+CONSTRAINT:RECT:17,11,19,13
+CONSTRAINT:RECT:17,15,19,17
+CONSTRAINT:RECT:17,19,19,21
+CONSTRAINT:RECT:9,10,10,10
+CONSTRAINT:CIRC:12.5,25,3
+# A list of points around which we want to focus our search.
+POINT:12,23
+POINT:10,25
+POINT:14,25
+POINT:10,5
+POINT:17,12
+POINT:9,1
+POINT:20,20
+POINT:6,6

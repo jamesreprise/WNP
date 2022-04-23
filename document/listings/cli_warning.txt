@@ -1,0 +1,6 @@
+Loading bounds...
+
+Bound MONA loaded.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+WARNING: You're trying to place 20 nodes to cover 9 sensors. Are you sure you want to do this?
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

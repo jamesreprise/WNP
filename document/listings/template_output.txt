@@ -1,0 +1,67 @@
+============================================================
+Launched Node Placement Optimiser with Args: ['.\\template.bounds']
+
+Loading bounds...
+
+Bound MONA loaded.
+MONA has following specifications:
+- # of Nodes: 5
+- Constraints:
+    - ('RECT', [[7.0, 7.0], [9.0, 9.0]])
+    - ('RECT', [[7.0, 11.0], [9.0, 13.0]])
+    - ('RECT', [[7.0, 15.0], [9.0, 17.0]])
+    - ('RECT', [[7.0, 19.0], [9.0, 21.0]])
+    - ('RECT', [[17.0, 7.0], [19.0, 9.0]])
+    - ('RECT', [[17.0, 11.0], [19.0, 13.0]])
+    - ('RECT', [[17.0, 15.0], [19.0, 17.0]])
+    - ('RECT', [[17.0, 19.0], [19.0, 21.0]])
+    - ('RECT', [[9.0, 10.0], [10.0, 10.0]])
+    - ('CIRC', [12.5, 25.0, 3.0])
+- Points:
+    - [12.0, 23.0]
+    - [10.0, 25.0]
+    - [14.0, 25.0]
+    - [10.0, 5.0]
+    - [17.0, 12.0]
+    - [9.0, 1.0]
+    - [20.0, 20.0]
+    - [6.0, 6.0]
+- Iterations: 500
+- Minimising: True
+============================================================
+Beginning optimisation...
+Random Search finished!
+Lowest average free space path loss: 47.67
+Best configuration found in 500 evaluations was:
+1 : [14.18, 17.79]
+2 : [12.64, 21.97]
+3 : [8.69, 1.38]
+4 : [9.19, 21.90]
+5 : [15.92, 12.88]
+
+Simulated Annealing finished!
+Lowest average free space path loss: 48.82
+Best configuration found in 500 evaluations was:
+1 : [0.28, 17.76]
+2 : [20.40, 11.18]
+3 : [8.54, 1.43]
+4 : [16.02, 12.22]
+5 : [12.25, 21.25]
+
+Genetic Search finished!
+Lowest average free space path loss: 49.94
+Best configuration found in 500 evaluations was:
+1 : [6.84, 22.69]
+2 : [19.19, 19.09]
+3 : [12.11, 1.05]
+4 : [18.22, 23.88]
+5 : [10.74, 4.92]
+
+Bayesian Search finished!
+Lowest average free space path loss: 48.28
+Best configuration found in 500 evaluations was:
+1 : [13.82, 19.22]
+2 : [6.85, 6.01]
+3 : [18.40, 10.15]
+4 : [10.49, 4.61]
+5 : [15.01, 21.41]

@@ -1,0 +1,30 @@
+\section{Extensions and Open Questions}
+	\label{sec:extensions}
+	Whilst I've endeavoured to provide as many of the tools for the optimisation of two-dimensional node placement problems as possible, the world of optimisation is as vast as it is deep and so necessarily there is further work that could be done to enhance the software produced in this project.
+
+	Additionally there are open questions that research into might prove fruitful in allowing for a more seamless experience in optimising node placement for novice users and developers alike. 
+
+	\subsection{3D Space}
+		\label{sec:extensions_3d} 
+		The physical world is three-dimensional. A two-dimensional abstraction of the real world allows for a more convenient understanding of the problem but we lose an entire dimensions worth of data in doing so. Taking for one final time our museum example, the museum in question may have very tall ceilings. If a team of network engineers were to take the results of a two-dimensional optimisation at face value and place the wireless nodes on the ceiling, the free space path loss of the distance from the ceiling to the point they hope to cover is lost entirely.
+
+		This would be fairly easy to incorporate into the existing optimisation library as long as further bounds were given as to the height of the environment. Visualisation of this space may be difficult using tools such as matplotlib. A 3D environment `explorer' that allows a user to change the camera angle at will may make this more understandable but would require a great deal of work.
+
+	\subsection{Hyperparameter Optimisation}  
+		\label{sec:extensions_hyperparameter}
+		Both our genetic algorithm and simulated annealing implementations have some hard coded values that may result in substandard optimisation results. We could make use use of our existing optimisation algorithms to optimise these values for the best configuration of the techniques to best serve the individual scenarios given to the libraries. It would significantly increase the time to completion of the optimisation, but a two-layer process in which we attempt an optimisation of the chosen algorithm and then run that algorithm could lead to more optimal results.
+		
+	\subsection{Multiple Objectives} 
+		\label{sec:extensions_multiple_objectives}
+		Currently, our optimisation library only supports objective functions that return a single result. In order to evaluate the configuration of networks according to multiple objectives, work would have to be done into implementing multiple objective versions of our concerned algorithms. Such algorithms do exist \cite{demarco2009mogamesh}\cite{younis2020placementsurvey} but the process of determining superiority of configurations with multiple objectives can be difficult and is the subject of research\cite{yoo2007pareto}.
+	
+	\subsection{Network Simulation}
+		\label{sec:extensions_network_sim}
+		\subsubsection{FSPL Extensions}
+			\label{sec:extensions_FSPL}
+			Currently our free space path loss implementation does not account for whether the physical constraints, such as support columns or physical objects in which nodes cannot be placed, may impact the signal strength of a point on the other side. Increasing the degree of accuracy in this regard would also increase the complexity of the objective function evaluation but as has been noted, Bayesian optimisation is an optimal method for scenarios where the objective function is expensive to evaluate.
+			
+		\subsubsection{Mobile Sensors} 
+			\label{sec:extensions_moving_sensors} 
+			In many environments, such as an office, laptops and mobile devices are constantly moving. Some research has been done into predicting future movements of sensors that networks seek to cover. Dynamic node repositioning schemes\cite{younis2020placementsurvey} that seek to ensure the wireless mesh network remains a fully connected graph and that sensors (laptops and mobile devices in this case) are still covered. Routing protocols that find the most efficient path from a sensor to a base station also exist to support the repositioning of nodes with minimal interruption to performance\cite{akyildiza47wireless}.
+		

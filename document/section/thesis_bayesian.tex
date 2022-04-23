@@ -1,0 +1,35 @@
+\section{Bayesian Optimisation}
+	\label{sec:bayesian}
+	In environments where the `dimensionality' or the number of decision variables of the objective function (as seen in section \ref{sec:problem_FSPL}) is high, optimising the inputs can be intensive in both time and resources. In many circumstances there are hundreds or even thousands of these `free variables' such that even a team of humans could not hope to make smart decisions about the next point to query. Similarly, attempting to exhaustively evaluate the entire search space using an optimisation method such as grid search rapidly becomes infeasible with increasing dimensionality due to the time and other constraints of carrying out such a computation.
+
+	Bayesian optimisation is an emerging optimisation method with a broad range of applicability. The optimisation of the parameters of optimisation algorithms, known as hyperparameter optimisation, is just one example of Bayesian optimisation's potential uses. This means we could potentially make use of our Bayesian optimiser to optimise our traditional algorithms if we felt so inclined. Other uses include machine learning, environmental monitoring and big data\cite{shahriari2015taking}.
+	
+	\subsection{A Brief, Technical Overview}
+		\label{sec:bayesian_overview} 
+		Bayesian optimisation is a novel approach to optimisation that makes use of Gaussian processes. This approach takes a sample of existing function evaluations and trains a Gaussian model on these input evaluation pairs. The inputs to these function evaluations are chosen through `latin hypercube sampling'\cite{deutsch2012lhs}. Latin hypercube sampling is a method of ensuring better random coverage of a highly dimensional space by dividing the number of query points into intervals and placing those intervals at sufficient distance from the other points. The Bayesian model creates a predictive distribution formed by knowledge we have about the objective function given from the sample of existing function evaluation results and their inputs.
+
+		The foundation of this process is Bayes' theorem.
+		\begin{equation}
+			p(A | B) = \frac{p(B | A) p(A)}{p(B)}
+		\end{equation}
+		This statement means that the probability of A occurring given that B is true ($P(A | B)$) is equal to the probability of B if A is true ($P(B | A)$) multiplied by the probability of A ($P(A)$) divided by the probability of B ($P(B)$). As it applies to our optimisation use, B is the known data the model has been trained on and A is an unobserved quantity.
+		
+	\subsection{Surrogate/Acquisition Function}
+		\label{sec:bayesian_surrogate}
+		The Gaussian process regressor (GPR) gives us an `acquisition' (or surrogate) function which is not the objective function itself, but rather an expressed belief about the probability of improvement if we choose to sample this space.
+
+		We use a method called `expected improvement' as our decision criterion in order to derive the likelihood of improvement from the result of the surrogate function. Expected improvement is not the only decision criterion we can use to compute the best next point to sample given the output of the GPR, but it is the one that has been implemented for this project. As seen in \ref{fig:bayesian_1d}, the likelihood of improvement approaches zero as the acquisition function heads towards a sampled point. In tandem with this, the degree of uncertainty about the function decreases as we approach a sampled point. This figure also accurately expresses the desire to exploit around (but not exactly at) the current optimum point compared to other points in the function space. Unlike previous algorithms we have considered, new information gained from sampling a point can intelligently re-focus the algorithm on exploration of the function space; each iteration is not simply one step closer to exploitation.
+
+		Of course, we've effectively moved from one function we want to optimise to another function we, simlarly, want to optimise. This transition is not fruitless, as with an expensive objective function the surrogate function will allow us to sample without incurring this expense. If we have constraints related to how many times we can sample the objective function or time itself, this function speeds up the process greatly.
+
+	\subsubsection{Simulated Annealing for the Optimisation of the Surrogate Function}  
+		\label{sec:bayesian_annealing}
+		As we discussed in section \ref{sec:traditional_simulated_annealing}, simulated annealing is an effective method of sampling the function space for an optimum based on concepts borrowed from metallurgy. In order to sample this new function we need a method that is not Bayesian optimisation, otherwise we encounter a problem of infinite recursion.
+
+		Simulated annealing is a strong candidate for the optimisation of the surrogate function for the reasons discussed in section \ref{sec:traditional_simulated_annealing} and as it intelligently samples the function space and can be tweaked to favour exploration or exploitation according to the needs of the user.
+	
+	\subsection{Applicability to Node Placement} 
+		\label{sec:bayesian_applicability} 
+		Evaluating the suitability of a node placement configuration is difficult and depends on the desired characteristics of the network. These evaluations can span anywhere from simple implementations (such as our free space path loss implementation as seen in section \ref{sec:problem_FSPL}) to complex simulations that may take hours to complete. Additionally the dimensionality of the problem becomes increasingly complex with each additional node. In two-dimensional space each node has two dimensions, whilst in three-dimensional space they have three. The consequences of this are that a relatively simple network configuration problem with only two nodes to place can be anywhere between four and six-dimensional problems. With every added dimension the problem space becomes exponentially larger. As can be derived from the above, Bayesian optimisation is well suited to problems where the objective function is computationally expensive with high numbers of dimensions\cite{shahriari2015taking}. 
+
+		

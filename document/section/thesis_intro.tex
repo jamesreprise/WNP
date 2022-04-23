@@ -1,0 +1,45 @@
+\section{Introduction}
+	\label{sec:intro}
+	
+	Emerging in the last two decades, wireless mesh networks (WMNs) are a relatively recent development in the domain of wireless networks which aim to surpass the performance of earlier wireless network layouts such as WPANs and WLANs\cite{akyildiza47wireless}. WMNs consist of an interconnection of `nodes', each of which is a device equipped with a radio that can communicate with other devices within a certain distance of another device. The `mesh' in wireless mesh networks refers to an approach in network topology under which each of the devices connect to each other directly rather than having to wait for any centralised authority, though there may be sources of authority on certain matters. This topology allows for a great degree of flexibility but also adds significant complexity over more traditional topologies. 
+
+	The applications of WMNs are numerous as they are, at their most generic level, just another way of organising a wireless network. Usage could span from consumer `internet of things' (IoT) devices within a home with only a single floor \cite{apte2018home} to specialised equipment that detects fires in hundreds of square kilometres of forests\cite{lloret2009wireless}\cite{jin2018evaluation}. As might be apparent the location and configuration of the individual nodes in wireless sensor mesh networks can have a large impact on the cost and performance of the network along almost every axis. Desired properties of the network such as speed or resistance to individual node failure will also impact node placement. This is an active research area\cite{younis2020placementsurvey}.
+
+	
+	\subsection{Motivations}
+		\label{sec:intro_motivation} 
+		
+		In order for our research to remain focused in such a wide area of study, we have taken the example of node placement in an indoor museum and consider how we could optimise a hypothetical scenario in which a network engineer installing wireless nodes must measure the strength of connectivity of sensors to a collection of nodes through a series of predetermined tests. In the event that the results of the measurements are not acceptable, the nodes must be moved in order to increase the strength to an acceptable level. In addition to simply finding the ideal placement for nodes, constraints can complicate the process of placement such as adhering to fire safety code and more literal physical constraints (e.g. a node cannot be placed inside of a supporting column.)
+	
+	\subsubsection{Objective}
+		\label{sec:intro_objective} 
+		
+		Deciding node placement for the scenario given above is difficult and also very time consuming. By utilising optimisation techniques we can minimise the number of tests and measurements that have to be taken and reach stronger configurations sooner. We have considered many optimisation techniques in the process of research, detailing their benefits and drawbacks and demonstrating this through data collected. Traditional techniques such as random search, simulated annealing and genetic algorithms have been considered alongside a more novel approach; Gaussian processes, a Bayesian modelling technique\cite{rahat2020bayesian}. This approach is driven by the data given in response to the predetermined tests. 
+
+		We frequently revisit our specific node placement problem in order to demonstrate the effectiveness of an optimisation when applied to a real problem, but it is important to consider the breadth and depth of this problem and how each optimisation could be applied to not just this specific scenario. 
+		
+	\subsection{Overview}  
+		\label{sec:intro_overview} 
+		
+		The rest of section \ref{sec:intro} is dedicated to the contributions of this document as well its structure. Section \ref{sec:problem} details the problem statement and a brief outline of potential solutions. Section \ref{sec:related_work} provides an overview of similar research and areas related to this work as well as its applications in industrial settings. Section \ref{sec:traditional} scrutinises the traditional optimisation techniques and section \ref{sec:bayesian} focuses on Bayesian optimisation. Section \ref{sec:comparison} compares the aforementioned optimisation techniques. Section \ref{sec:extensions} discusses the shortcomings of the current software and what might be improved in the future. In section \ref{sec:conclusion} the findings and products of this project are summarised.
+	
+	\subsection{Contributions} 
+		\label{sec:intro_contribs} 
+		
+		The contributions of this dissertation are the following:
+		
+		\begin{description}	
+		
+			\item A software library for the optimising of 2D node placement
+			
+			This library is general enough to be used in any 2D node placement project and also easily modifiable to suit more specific needs.
+			
+			\item Software aiding the use of the optimisation library
+			
+			For users who do not have a great deal of programming skill, this software works out of the box to interface with the library in an easy to understand way.
+			
+			\item This document
+						
+			We review techniques and compare their usefulness in response to the growth of the number of dimensions and the complexity of the objective function (see chapter \ref{sec:problem}).
+			
+		\end{description}

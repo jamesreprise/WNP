@@ -1,0 +1,37 @@
+\documentclass[10pt, twocolumn]{article}
+
+\begin{document}
+    \title{Node Placement for \\ Wireless Sensor Mesh Networks}
+	\author{James Williams \\
+			Swansea University \\
+			williamsjn@protonmail.com\\
+			\and
+			Alma Rahat \\
+			Swansea University\\
+			a.rahat@swansea.ac.uk\\}
+% Hard code the date or allow the LaTeX compiler to fill it in whenever you recompile the document.
+	\date{\today}
+	\twocolumn[
+		\begin{@twocolumnfalse}
+		\maketitle
+	
+		\begin{abstract}
+			Wireless sensor mesh networks (WMNs) are a modern network topology where the placement of nodes has a large effect on the performance of the network. We enumerate some of their uses, demonstrating their flexibility and broad range of utility. We then consider a scenario of placing nodes in a network where testing each configuration of placements is costly in terms of time and resources. Then through the lens of this node placement scenario We introduce several popular optimisation techniques, some which are novel and subject of active research. We compare these methods and show how they have been implemented in the produced software. Software that has been created is demonstrated, potential extensions to the software and some open questions are reviewed and then concluding remarks are given.
+		\end{abstract}
+	\end{@twocolumnfalse}
+	]
+	
+	\input{./section/thesis_intro}
+	\input{./section/thesis_problem}
+	\input{./section/thesis_related_work}
+	\input{./section/thesis_traditional}
+	\input{./section/thesis_bayesian}
+	\input{./section/thesis_comparison}
+	\input{./section/thesis_software}
+	\input{./section/thesis_extensions}
+	\input{./section/thesis_conclusion}
+
+	\bibliography{citations}
+	\bibliographystyle{ieeetr}
+	
+\end{document}

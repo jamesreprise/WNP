@@ -1,0 +1,28 @@
+\section{Problem Statement}
+	\label{sec:problem}
+	The introduction details the specific troubles of node placement. This problem is sufficiently complex and so often repeated that it bears worth researching and developing software solutions for. During the course of our research we have developed software that enables the optimisation of placement of nodes given constraints both in terms of the time to generate the next candidate solution as well as finding an approximate global optimum configuration as quickly as possible.
+	
+	\subsection{Free Space Path Loss}
+		\label{sec:problem_FSPL} 
+		We can define the process by which we measure the free space path loss (FSPL) \cite{monebhurrun2019standard} of each node:
+		\begin{equation}
+			g(S_n, D)
+		\end{equation}
+		where $S_n$ is a source node $s \in S = (S_1, S_2, S_3, ..., S_n)$, $D$ is a list of destination nodes $d \in D = (D_1, D_2, D_3, ..., D_n)$. In some cases, $S = D$ and $S_n \in D$ as WMNs may seek to re-broadcast data through other nodes in order for the data to reach another point. Here, the global optimum is the minimum value as we want to minimise the FSPL.
+		
+		From the set of results that we generate by running the function $g$ over all the given nodes we find the layout $l = (S, D)$ from the set of all possible layouts $L$ of the nodes with the lowest average minimum FSPL. Mathematically, we are searching for the global minimizer of the objective function $g$:
+
+		\begin{equation}
+			l* = \underset{l \in L}{arg\: min}\; g(l)
+		\end{equation}
+
+		The set $L$ of all possible layouts can be extremely large and while each evaluation of $g$ takes linear time $O(n)$ in the size of $D$, the brute force approach to evaluating a single layout is quadratic $O(n^2)$, making a single large layout evaluation computationally expensive. By minimising the FSPL, we are maximising the connection strength and ability of the source node to access the destination nodes.
+	\subsection{Broadness of the Problem}
+		\label{sec:problem_broadness} 
+		In practice this notation lacks detail on how we deal with the practical constraints of placing wireless nodes in a real building. For example, power may only be available in certain places, fire safety code will prevent us from placing sensors in certain locations. There are many ways of dealing with possible constraints. By publishing the code, we have given a great degree of control to other developers making use of the optimisation library so that they may introduce their own complex constraints based on outside sources of information. In turn the developer will have to engage on a deeper level with the library's code in order to extract the maximum utility from it. Keep in mind that the examples given above are not a reflection of limits that are be put in place by the optimisation library and that it is applicable in any environment, not just indoors. It could be used just as easily to optimise the placements of geo-stationary satellites in orbit of a planet as for placing sensors in a museum.
+		
+	\subsection{Working Towards a Solution}  
+		\label{sec:problem_solution} 
+		As we have referred to in section \ref{sec:intro_contribs}, part of this project's production is the creation of a general software library for optimising node placement. In the creation of this library we have examined various `traditional' optimisation techniques such as random search, genetic algorithms, simulated annealing as well as more novel techniques such as Gaussian processes. Each of these optimisation techniques can be easily be reused by another program that submits an equivalent objective function. This library is  primarily focused on ideal placement of vertices in two-dimensional space, with specific attention on minimising the number of iterations required to find an approximate global optimum.
+
+		By benchmarking each of the optimisation techniques in their effectiveness in terms of the minimum number of operations required to achieve an acceptably low distance from the global optimum as well as time taken we aim show that both classic and novel optimisation techniques can provide significant improvements in minimising the time spent by engineers attempting to generate the ideal placement of wireless nodes.

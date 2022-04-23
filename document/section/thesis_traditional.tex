@@ -1,0 +1,38 @@
+\section{Traditional Techniques}
+	\label{sec:traditional}
+	In the process of optimisation a single technique is applied repeatedly to produce a query for the objective function, which returns a result, and eventually a final solution is given. The number of repetitions of this process, its boundaries and constraints and whether it is seeking to minimise or maximise results from the objective function are all key but extraneous factors for the technique (or algorithm.) We consider these factors among others in which algorithm we use but they do not guide the core principles which are typically based on the trade off between exploration and exploitation.
+	
+	\subsection{Random Search}
+		\label{sec:traditional_random} 
+		The process of random search is strikingly simple. Given that we have an objective function we can query and we know its bounds, we simply generate random valid coordinates and query the function for as many iterations as are feasible or are allowed by the constraints of the problem.
+
+		Random search is one of the exceptions to the above assertion that there is some balance to be struck between exploration and exploitation. One could choose to say that random search is pure exploration as it makes no decisions based on results previously gathered. This choice is naive and in highly dimensional problems is unlikely to yield any significant results in an environment where the objective function is computationally expensive. However, because it uses none of the previous results it is also embarrassingly parallel as no communication is needed between agents making decisions about which query to make next.
+		
+		Under certain circumstances random search may be an effective and appropriate way to query a search space but these circumstances are likely few and far between.
+		
+	\subsection{Genetic Algorithms}  
+		\label{sec:traditional_genetic}
+		Genetic algorithms are a class of optimisation algorithms that make use of the concept of natural selection\cite{darwin1909origin}, where solutions to the problem `evolve' through random mutation and inheritance from existing top candidate solutions. The application of concepts from the natural world in computer science is not new by any means. In \textit{I.---Computing Machinery and Intelligence} by A. M. Turing\cite{turing1950learning}, published in 1950, Turing talks about a machine's ability to learn through repetition of teaching and evaluation and this processes's parallels with evolution. In our example, we consider natural selection to be equivalent to the objective function evaluation and its result. 
+
+		The basic flow of a genetic algorithm is as follows. First, a random population is created then evaluated and sorted according to the objective function's response to the decision variables. Then the process of crossing over and mutating the parents begins. According to predetermined probabilities, the  mutation for individual genes is carried out and the crossover of the parents is carried out. For example, a function with four dimensions would have parents with two nodes each (as each node has two coordiantes.) During crossover two children are created, one with the left node from the first parent and the right node from the second parent and another vice versa. Once the children are created, they are evaluated and the top `children' from the population are the input population for the next iteration.
+
+		In our implementation, the `genes' are represented by the coordinates of the nodes to be placed. The parallels between individual nodes in a configuration and genes are quite apparent. As such, parents can pass genes onto their children in the form of entire nodes as both the X and Y coordinates are preserved. However the preservation of individual nodes that make up known good parents do not necessitate a better or even equivalent child; the same is true in biology. Perhaps some of the nodes of the children are simply repeated, reducing coverage and yielding a lower objective function response. Mutation is carried out by Gaussian mutation, which finds a middle point and then adds a random factor from a Gaussian (normal) distribution. In this way, genetic algorithms intelligently exploit known optimal parents but continue exploring by creating children and mutating them to add an element of random exploration as in the natural world.
+
+		There are drawbacks to genetic algorithms. Genetic algorithms are not easily parallelisable and would require concurrent work to stop and results to be compiled every time a new generation was created. Additionally, genetic algorithms can often `converge'\cite{langdon2013foundations} earlier than ideal, ending the exploration phase, if one individual is significantly superior or `fitter' than its peers.
+
+	\subsection{Simulated Annealing} 
+		\label{sec:traditional_simulated_annealing} 
+		Simulated annealing is another algorithm that makes use of past function evaluations to make decisions about the next query point. Taken from the concept of `annealing' in metallurgy (a domain of science concerning metals), this algorithm uses a cooling or `decay' curve that represents the preference for exploitation instead of exploration as the number of function evaluations increases. 
+
+		We carry out the process of exploration through the choice of a new `neighbour' to the current state. The distance that the state can travel is bounded so that we only move so fast through the function space and give the algorithm adequate opportunity to explore each potential space. This bound can be tightened or widened in order to favour exploration or exploitation more explicitly. In multi-dimensional functions we apply a change to all dimensions. This does not mean that each individual dimension will necessarily move as the neighbour function may select this node to travel an insignificant distance (or potentially no distance at all.)
+		
+		In earlier evaluations a simulated annealing algorithm is more likely to accept a poorer solution as the next iteration's starting state for the sake of exploring the function space. In later evaluations this becomes increasingly unlikely to happen and instead only superior solutions are accepted as the new current state in the function space.
+		
+		This algorithm makes explicit the decision of exploration versus exploitation. As we have additional information from the exploration phase, we gain a greater degree of confidence about our understanding of the overall function space. Exploitation becomes increasingly attractive though the gains made from this are usually fairly minimal. To reflect this, in our implementation we use a `fast' cooling curve:
+		\begin{equation}
+			 t_k = \frac{t_i}{k}
+		\end{equation}
+		where $t_k$ is the temperature at the $k$th iteration and $t_i$ is the initial temperature. Despite its name, it is one of the slower decay curves. We chose an initial temperature of 5.5\cite{wright2010automating} so as to reduce the initial state's impact on the final result.
+
+		Simulated annealing thrives in environments where it can make a large number of queries to the objective function in order to gain as much information as possible. However it can be slow to find optimums depending on the choice of decay curve and how neighbours are chosen. 
+		
